@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://harmonyshop-x8k2.vercel.app';
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": `${siteUrl}/about` }
+  ]
+};
+---
+
+<Base
+  title="About Harmony Threads | Music Merch for True Fans"
+  description="Harmony Threads was born from a love of music and the belief that great art deserves to be worn. Learn about our mission, values, and the people behind the tees."
+  structuredData={breadcrumb}
+>
+  <section style="padding:4rem 0 3rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <nav style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">
+        <a href="/" style="color:var(--text-muted);text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;">→</span>
+        <span>About</span>
+      </nav>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin-bottom:0.75rem;">Our Story</h1>
+      <p style="color:var(--text-muted);font-size:1.05rem;">The music mattered first. The tees came second.</p>
+    </div>
+  </section>
+  <main>
+    <section style="padding:5rem 0;">
+      <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:960px;">
+        <div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;margin-bottom:1rem;">Born from the records</h2>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">Harmony Threads started in 2026 when a group of music-obsessed friends got fed up with the same thing: band merch that looked cheap and fell apart after five washes.</p>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">We spent six months sourcing the right cotton (180gsm heavyweight), finding a printer who understood water-based inks, and designing graphics worthy of the artists who inspired them.</p>
+          <p style="color:var(--text-muted);line-height:1.8;">Our first drop was <strong style="color:var(--text);">The Band Graphic Tee</strong>. It sold out in 72 hours.</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;aspect-ratio:4/5;">
+          <img src="https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=600" alt="Harmony Threads founder with The Band tee" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+        </div>
+      </div>
+    </section>
+    <section style="padding:4rem 0;background:var(--bg-card);border-top:1px solid var(--border);">
+      <div class="container">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem;">What we stand for</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:900px;margin:0 auto;">
+          {[{e:'🎵',t:'Music First',d:'Every design starts with deep respect for the artist.'},{e:'🧵',t:'Premium Quality',d:'180gsm cotton, water-based inks, pre-shrunk.'},{e:'♻️',t:'Responsible',d:'Ethically sourced, eco-friendly printing.'}].map(v => (
+            <div style="text-align:center;padding:2rem 1.5rem;">
+              <div style="font-size:2.5rem;margin-bottom:1rem;">{v.e}</div>
+              <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:0.75rem;">{v.t}</h3>
+              <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">{v.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section style="padding:5rem 0;">
+      <div class="container" style="text-align:center;max-width:600px;">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:1rem;">Wear the music you live for</h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:2rem;">We're a small team with big ears and high standards. <a href="/contact" style="color:var(--accent);text-decoration:none;">Get in touch</a> — we read every email.</p>
+        <a href="/shop" class="btn-primary" style="padding:0.875rem 2.5rem;">Shop The Collection</a>
+      </div>
+    </section>
+  </main>
+</Base>

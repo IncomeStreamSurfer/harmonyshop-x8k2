@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://harmonyshop-x8k2.vercel.app';
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Harmony Threads",
+  "url": siteUrl,
+  "logo": `${siteUrl}/favicon.svg`,
+  "sameAs": []
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Harmony Threads",
+  "url": siteUrl,
+  "description": "Premium music graphic tees celebrating rock history"
+};
+---
+
+<Base
+  title="Harmony Threads | Premium Music Graphic Tees"
+  description="Wear the music you love. Premium graphic tees celebrating the icons who shaped rock history. Shop The Band graphic tee collection."
+  structuredData={[orgSchema, websiteSchema]}
+  tags={["music tees", "graphic t-shirts", "The Band", "rock merch", "vintage style"]}
+>
+  <section style="min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, #0f0f0f 0%, #1a0a06 50%, #0f0f0f 100%);"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%, rgba(232,71,42,0.15) 0%, transparent 70%);"></div>
+    <div class="container" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding-top:4rem;padding-bottom:4rem;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,71,42,0.15);border:1px solid rgba(232,71,42,0.3);border-radius:100px;padding:0.35rem 1rem;margin-bottom:1.5rem;">
+          <span style="width:6px;height:6px;background:#E8472A;border-radius:50%;display:inline-block;"></span>
+          <span style="color:#E8472A;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Limited Edition Drop</span>
+        </div>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.1;margin:0 0 1.25rem;">
+          Wear the Music<br /><span style="color:#E8472A;">You Live For</span>
+        </h1>
+        <p style="font-size:1.15rem;color:var(--text-muted);line-height:1.7;max-width:440px;margin-bottom:2rem;">
+          Premium graphic tees that honour the legends. Our exclusive <strong style="color:var(--text);">The Band</strong> collection captures the soul of rock's golden era.
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;">
+          <a href="/shop" class="btn-primary">Shop the Collection</a>
+          <a href="/about" class="btn-secondary">Our Story</a>
+        </div>
+        <div style="display:flex;gap:2.5rem;">
+          <div><div style="font-size:1.5rem;font-weight:700;">100%</div><div style="font-size:0.8rem;color:var(--text-muted);">Premium Cotton</div></div>
+          <div style="width:1px;background:var(--border);"></div>
+          <div><div style="font-size:1.5rem;font-weight:700;">Free</div><div style="font-size:0.8rem;color:var(--text-muted);">Shipping over $50</div></div>
+          <div style="width:1px;background:var(--border);"></div>
+          <div><div style="font-size:1.5rem;font-weight:700;">30-day</div><div style="font-size:0.8rem;color:var(--text-muted);">Easy Returns</div></div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div style="border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-card);">
+          <img src="https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=800" alt="The Band graphic t-shirt by Harmony Threads" style="width:100%;height:100%;object-fit:cover;" loading="eager" />
+          <div style="position:absolute;top:1.25rem;left:1.25rem;background:var(--accent);color:white;font-size:0.75rem;font-weight:700;padding:0.35rem 0.75rem;border-radius:100px;text-transform:uppercase;">New Drop</div>
+          <div style="position:absolute;bottom:1.25rem;right:1.25rem;background:rgba(15,15,15,0.95);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.25rem;">
+            <div style="font-size:0.75rem;color:var(--text-muted);text-decoration:line-through;">$24.99</div>
+            <div style="font-size:1.4rem;font-weight:700;">$19.99</div>
+            <div style="font-size:0.7rem;color:#4ade80;font-weight:600;">Save 20%</div>
+          </div>
+        </div>
+        <div style="position:absolute;top:-1rem;right:-1rem;background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;">
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.25rem;">Available in</div>
+          <div style="display:flex;gap:0.4rem;">
+            <span style="width:16px;height:16px;border-radius:50%;background:#4a7c4e;border:2px solid var(--border);display:inline-block;"></span>
+            <span style="width:16px;height:16px;border-radius:50%;background:#6b7280;border:2px solid var(--border);display:inline-block;"></span>
+            <span style="width:16px;height:16px;border-radius:50%;background:#dc2626;border:2px solid var(--border);display:inline-block;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;">
+    <div class="container" style="display:flex;gap:3rem;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <div style="color:var(--text-muted);font-size:0.875rem;">⭐⭐⭐⭐⭐ 4.9/5 from 200+ fans</div>
+      <div style="color:var(--border);">|</div>
+      <div style="color:var(--text-muted);font-size:0.875rem;">🚚 Free shipping on orders over $50</div>
+      <div style="color:var(--border);">|</div>
+      <div style="color:var(--text-muted);font-size:0.875rem;">🔄 Hassle-free 30-day returns</div>
+      <div style="color:var(--border);">|</div>
+      <div style="color:var(--text-muted);font-size:0.875rem;">🔒 Secure checkout via Stripe</div>
+    </div>
+  </section>
+
+  <section style="padding:5rem 0;" id="products">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2.25rem;font-weight:700;margin-bottom:0.75rem;">Featured Collection</h2>
+        <p style="color:var(--text-muted);max-width:480px;margin:0 auto;">Each piece tells a story. Hand-printed graphics on heavyweight 100% cotton tees built to last.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;margin-bottom:3rem;">
+        {[{color:'green',label:'Forest Green',hex:'#4a7c4e',filter:'none',badge:'Best Seller'},{color:'gray',label:'Slate Gray',hex:'#6b7280',filter:'grayscale(40%)',badge:null},{color:'red',label:'Crimson Red',hex:'#dc2626',filter:'hue-rotate(270deg) saturate(1.3)',badge:null}].map(v => (
+          <a href={`/product/physical-product-the-band-t-shirt?color=${v.color}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+            <div style="position:relative;aspect-ratio:1;overflow:hidden;background:var(--bg-card2);">
+              <img src="https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=600" alt={`The Band tee in ${v.label}`} style={`width:100%;height:100%;object-fit:cover;filter:${v.filter};`} loading="lazy" />
+              {v.badge && <div style="position:absolute;top:0.75rem;left:0.75rem;background:var(--accent);color:white;font-size:0.7rem;font-weight:700;padding:0.25rem 0.6rem;border-radius:100px;">{v.badge}</div>}
+            </div>
+            <div style="padding:1.25rem;">
+              <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">Harmony Threads</div>
+              <h3 style="font-size:1rem;font-weight:600;margin:0 0 0.5rem;">The Band Tee — {v.label}</h3>
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                <span style="font-size:1.15rem;font-weight:700;">$19.99</span>
+                <span style="font-size:0.85rem;color:var(--text-muted);text-decoration:line-through;">$24.99</span>
+                <span style="font-size:0.75rem;color:#4ade80;font-weight:600;">20% off</span>
+              </div>
+              <div style="color:var(--accent);font-size:0.875rem;font-weight:600;">Shop Now →</div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center;"><a href="/shop" class="btn-secondary">View All Products</a></div>
+    </div>
+  </section>
+
+  <section style="padding:5rem 0;background:var(--bg-card);border-top:1px solid var(--border);">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:1rem;">Born from a love of music</h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">Harmony Threads was founded by lifelong music fans who wanted wearable art — not cheap print-on-demand shirts. Every design is a tribute to the artists who changed everything.</p>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">We use 180gsm heavyweight cotton, screen-printed with water-based inks that stay vivid through hundreds of washes.</p>
+        <a href="/about" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:0.9rem;">Read our full story →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        {[{e:'🎵',t:'Music First',d:'Every design honours real artists'},{e:'♻️',t:'Sustainable',d:'Water-based inks, ethical supply chain'},{e:'🧵',t:'Premium Cotton',d:'180gsm heavyweight construction'},{e:'📦',t:'Fast Shipping',d:'Ships in 2–3 business days'}].map(item => (
+          <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;">{item.e}</div>
+            <div style="font-weight:600;margin-bottom:0.25rem;">{item.t}</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">{item.d}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:5rem 0;" id="reviews">
+    <div class="container">
+      <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem;">What fans are saying</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+        {[{q:'Quality is unreal. I\'ve washed this thing 20 times and the graphic is still crisp. Worth every penny.',n:'Marcus T.'},{q:'Finally, a music tee that doesn\'t look like it came from a souvenir shop. The artwork is stunning.',n:'Sarah K.'},{q:'Ordered the green one, loved it so much I came back for the red. Fit is perfect.',n:'Jay R.'}].map(r => (
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;">
+            <div style="color:#fbbf24;margin-bottom:0.75rem;">★★★★★</div>
+            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.6;margin-bottom:1rem;">"{r.q}"</p>
+            <div style="font-size:0.85rem;font-weight:600;">— {r.n}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;background:linear-gradient(135deg, #1a0a06, #0f0f0f);">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:1rem;">Ready to rep your sound?</h2>
+      <p style="color:var(--text-muted);margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto;">Join thousands of music fans who wear their passion with pride.</p>
+      <a href="/shop" class="btn-primary" style="font-size:1.05rem;padding:0.875rem 2.5rem;">Shop the Collection</a>
+    </div>
+  </section>
+</Base>

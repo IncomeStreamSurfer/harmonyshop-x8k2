@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+export const prerender = false;
+const { slug } = Astro.params;
+const url = new URL(Astro.request.url);
+const selectedColor = url.searchParams.get('color') || 'green';
+const selectedSize = url.searchParams.get('size') || 'M';
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://harmonyshop-x8k2.vercel.app';
+const productData: Record<string, any> = {
+  'physical-product-the-band-t-shirt': {
+    title: 'The Band Graphic T-Shirt',
+    vendor: 'Harmony Threads',
+    description: `Celebrate the timeless legacy of one of rock music's most influential groups with our exclusive The Band Graphic T-Shirt. Perfect for music lovers and vintage style enthusiasts, this t-shirt features a striking graphic of The Band, capturing the essence of their iconic sound and enduring spirit.`,
+    price: 19.99,
+    compareAt: 24.99,
+    sizes: ['Small', 'Medium', 'Large', 'XL'],
+    colors: [
+      { value: 'green', label: 'Forest Green', hex: '#4a7c4e', filter: 'none' },
+      { value: 'gray', label: 'Slate Gray', hex: '#6b7280', filter: 'grayscale(40%)' },
+      { value: 'red', label: 'Crimson Red', hex: '#dc2626', filter: 'hue-rotate(270deg) saturate(1.3)' },
+    ],
+    image: 'https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=1000',
+    tags: ['Unisex', 'Clothing', 'Men', 'Women', 'Casual', 'Vintage'],
+  }
+};
+const product = productData[slug as string];
+if (!product) { return Astro.redirect('/shop'); }
+const currentColor = product.colors.find((c: any) => c.value === selectedColor) || product.colors[0];
+const productSchema = { "@context": "https://schema.org", "@type": "Product", "name": product.title, "description": product.description, "image": product.image, "brand": { "@type": "Brand", "name": product.vendor }, "offers": { "@type": "Offer", "price": product.price.toFixed(2), "priceCurrency": "USD", "availability": "https://schema.org/InStock" } };
+const breadcrumb = { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }, { "@type": "ListItem", "position": 2, "name": "Shop", "item": `${siteUrl}/shop` }, { "@type": "ListItem", "position": 3, "name": product.title, "item": `${siteUrl}/product/${slug}` }] };
+---
+<Base title={`${product.title} | Harmony Threads`} description={product.description.slice(0,155)+'…'} ogImage={product.image} ogType="product" structuredData={[productSchema, breadcrumb]} tags={product.tags}>
+  <section style="padding:2rem 0 5rem;">
+    <div class="container">
+      <nav style="font-size:0.8rem;color:var(--text-muted);margin-bottom:2rem;"><a href="/" style="color:var(--text-muted);text-decoration:none;">Home</a><span style="margin:0 0.5rem;">→</span><a href="/shop" style="color:var(--text-muted);text-decoration:none;">Shop</a><span style="margin:0 0.5rem;">→</span><span>{product.title}</span></nav>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+        <div>
+          <div style="border-radius:16px;overflow:hidden;aspect-ratio:1;background:var(--bg-card);position:relative;">
+            <img id="main-product-image" src={product.image} alt={`${product.title} in ${currentColor.label}`} style={`width:100%;height:100%;object-fit:cover;filter:${currentColor.filter};transition:filter 0.3s;`} />
+            <div style="position:absolute;top:1rem;left:1rem;background:var(--accent);color:white;font-size:0.75rem;font-weight:700;padding:0.35rem 0.75rem;border-radius:100px;">Sale — 20% off</div>
+          </div>
+          <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+            {product.colors.map((c: any) => (
+              <button data-color={c.value} data-filter={c.filter} onclick={`selectColor('${c.value}', '${c.filter}', '${c.label}')`} style={`flex:1;aspect-ratio:1;border-radius:8px;overflow:hidden;border:2px solid ${c.value === selectedColor ? 'var(--accent)' : 'var(--border)'};cursor:pointer;background:var(--bg-card2);padding:0;`} aria-label={`View in ${c.label}`}>
+                <img src={product.image} alt={c.label} style={`width:100%;height:100%;object-fit:cover;filter:${c.filter};`} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem;">{product.vendor}</div>
+          <h1 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin:0 0 1rem;">{product.title}</h1>
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;"><span style="color:#fbbf24;">★★★★★</span><span style="color:var(--text-muted);font-size:0.85rem;">4.9 (200+ reviews)</span></div>
+          <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:1.75rem;">
+            <span style="font-size:2rem;font-weight:700;" id="current-price">${product.price.toFixed(2)}</span>
+            <span style="font-size:1rem;color:var(--text-muted);text-decoration:line-through;">${product.compareAt.toFixed(2)}</span>
+            <span style="background:rgba(74,222,128,0.15);color:#4ade80;font-size:0.75rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:4px;">Save 20%</span>
+          </div>
+          <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.75rem;">Colour: <span id="color-label" style="color:var(--text-muted);font-weight:400;">{currentColor.label}</span></div>
+            <div style="display:flex;gap:0.75rem;" id="color-swatches">
+              {product.colors.map((c: any) => (
+                <button data-color={c.value} data-filter={c.filter} data-label={c.label} onclick={`selectColor('${c.value}', '${c.filter}', '${c.label}')`} style={`width:40px;height:40px;border-radius:50%;background:${c.hex};border:3px solid ${c.value === selectedColor ? 'var(--accent)' : 'var(--border)'};cursor:pointer;`} title={c.label}></button>
+              ))}
+            </div>
+          </div>
+          <div style="margin-bottom:2rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;"><span style="font-size:0.85rem;font-weight:600;">Size: <span id="size-label" style="color:var(--text-muted);font-weight:400;">{selectedSize}</span></span></div>
+            <div style="display:flex;gap:0.6rem;" id="size-buttons">
+              {product.sizes.map((s: string) => (
+                <button data-size={s} onclick={`selectSize('${s}')`} style={`min-width:52px;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.85rem;font-weight:500;cursor:pointer;border:1px solid ${s === selectedSize ? 'var(--accent)' : 'var(--border)'};background:${s === selectedSize ? 'rgba(232,71,42,0.15)' : 'transparent'};color:${s === selectedSize ? 'var(--accent)' : 'var(--text-muted)'};`}>{s}</button>
+              ))}
+            </div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-bottom:2rem;">
+            <form action="/api/checkout" method="POST" style="flex:1;">
+              <input type="hidden" name="product_slug" value={slug || ''} />
+              <input type="hidden" id="form-color" name="color" value={selectedColor} />
+              <input type="hidden" id="form-size" name="size" value={selectedSize} />
+              <button type="submit" class="btn-primary" style="width:100%;padding:0.875rem;font-size:1rem;">Buy Now — ${product.price.toFixed(2)}</button>
+            </form>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.85rem;">🚚 Free shipping on orders over $50</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.85rem;">🔄 30-day hassle-free returns</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.85rem;">🔒 Secure checkout via Stripe</div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:600;margin-bottom:0.75rem;">About this piece</h2>
+            <p style="color:var(--text-muted);line-height:1.7;font-size:0.9rem;">{product.description}</p>
+            <ul style="color:var(--text-muted);font-size:0.85rem;line-height:2;padding-left:1.25rem;margin-top:0.75rem;">
+              <li>180gsm 100% heavyweight cotton</li>
+              <li>Water-based screen print — wash-resistant and vivid</li>
+              <li>Unisex relaxed fit (true to size)</li>
+              <li>Machine washable — cold wash, tumble dry low</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem;text-align:center;">
+        <p style="color:var(--text-muted);">Looking for more? <a href="/shop" style="color:var(--accent);text-decoration:none;">Browse the full collection →</a></p>
+      </div>
+    </div>
+  </section>
+  <script>
+    function selectColor(color: string, filter: string, label: string) {
+      const img = document.getElementById('main-product-image') as HTMLImageElement;
+      if (img) img.style.filter = filter;
+      const colorLabel = document.getElementById('color-label');
+      if (colorLabel) colorLabel.textContent = label;
+      const formColor = document.getElementById('form-color') as HTMLInputElement;
+      if (formColor) formColor.value = color;
+      document.querySelectorAll('#color-swatches button').forEach((btn: any) => { btn.style.borderColor = btn.dataset.color === color ? 'var(--accent)' : 'var(--border)'; });
+    }
+    function selectSize(size: string) {
+      const sizeLabel = document.getElementById('size-label');
+      if (sizeLabel) sizeLabel.textContent = size;
+      const formSize = document.getElementById('form-size') as HTMLInputElement;
+      if (formSize) formSize.value = size;
+      document.querySelectorAll('#size-buttons button').forEach((btn: any) => { const sel = btn.dataset.size === size; btn.style.borderColor = sel ? 'var(--accent)' : 'var(--border)'; btn.style.background = sel ? 'rgba(232,71,42,0.15)' : 'transparent'; btn.style.color = sel ? 'var(--accent)' : 'var(--text-muted)'; });
+    }
+    (window as any).selectColor = selectColor;
+    (window as any).selectSize = selectSize;
+  </script>
+</Base>
